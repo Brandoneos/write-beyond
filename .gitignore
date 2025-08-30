@@ -1,0 +1,113 @@
+
+
+
+# React
+frontend/node_modules
+frontend/build
+
+# Spring Boot
+backend/target
+*.class
+*.jar
+
+# IDE files
+*.idea
+*.iml
+*.vscode
+.DS_Store
+
+# Logs
+*.log
+
+
+# React
+frontend/node_modules
+frontend/build
+
+# Spring Boot
+backend/target
+*.class
+*.jar
+
+# IDE files
+*.idea
+*.iml
+*.vscode
+.DS_Store
+
+# Logs
+*.log
+
+# Others:
+Project Idea.txt
+write-beyond.zip
+
+# More Frontend:
+
+# dependencies
+
+frontend/.pnp
+frontend/.pnp.js
+
+# testing
+frontend/coverage
+
+# production
+
+
+# misc
+frontend/.DS_Store
+frontend/.env.local
+frontend/.env.development.local
+frontend/.env.test.local
+frontend/.env.production.local
+
+frontend/npm-debug.log*
+frontend/yarn-debug.log*
+frontend/yarn-error.log*
+
+# More Backend:
+backend/HELP.md
+backend/write-beyond/target/
+backend/.mvn/wrapper/maven-wrapper.jar
+!backend/**/src/main/**/target/
+!backend/**/src/test/**/target/
+*.jar
+### STS ###
+backend/.apt_generated
+backend/.classpath
+backend/.factorypath
+backend/.project
+backend/.settings
+backend/.springBeans
+backend/.sts4-cache
+
+### IntelliJ IDEA ###
+backend/.idea
+backend/*.iws
+backend/*.iml
+backend/*.ipr
+
+### NetBeans ###
+backend/nbproject/private/
+backend/nbbuild/
+backend/dist/
+backend/nbdist/
+backend/.nb-gradle/
+backend/build/
+!backend/**/src/main/**/build/
+!backend/**/src/test/**/build/
+
+### VS Code ###
+backend/.vscode/
+backend/write-beyond/target/write-beyond-0.0.1-SNAPSHOT.jar.original
+backend/write-beyond/HELP.md
+backend/write-beyond/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst
+backend/write-beyond/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst
+backend/write-beyond/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst
+backend/write-beyond/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst
+backend/write-beyond/target/surefire-reports/2025-08-29T22-45-02_938.dumpstream
+backend/write-beyond/target/surefire-reports/com.example.write_beyond.WriteBeyondApplicationTests.txt
+backend/write-beyond/target/surefire-reports/TEST-com.example.write_beyond.WriteBeyondApplicationTests.xml
+backend/write-beyond/target/classes/application.properties
+backend/write-beyond/target/maven-archiver/pom.properties
