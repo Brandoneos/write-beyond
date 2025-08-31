@@ -111,3 +111,4 @@ backend/write-beyond/target/surefire-reports/com.example.write_beyond.WriteBeyon
 backend/write-beyond/target/surefire-reports/TEST-com.example.write_beyond.WriteBeyondApplicationTests.xml
 backend/write-beyond/target/classes/application.properties
 backend/write-beyond/target/maven-archiver/pom.properties
+frontend/note.txt
