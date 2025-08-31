@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "../index.css";
+// import App from "../App";
 
 const HomePage = () => {
   const [message, setMessage] = useState("");
@@ -16,7 +18,7 @@ const HomePage = () => {
   };
 
   return (
-    <div style={{ padding: "20px" }}>
+    <div style={{ paddingTop: "20px", paddingLeft: "320px" }}>
       <h1>Home Page</h1>
       <button onClick={fetchGoodbye}>Goodbye from Home Page API</button>
       <button onClick={() => navigate("/goodbye")}>Go to Goodbye Page</button>

@@ -1,0 +1,50 @@
+/* src/components/Sidebar/Sidebar.css */
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh; /* full viewport height */
+  width: 250px;
+  background-color: #1f2937; /* dark gray */
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px;
+  box-shadow: 2px 0 5px rgba(0,0,0,0.2);
+}
+
+.sidebar-logo {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 40px;
+}
+
+.sidebar-nav a {
+  display: block;
+  padding: 10px 0;
+  color: #fff;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.sidebar-nav a:hover {
+  background-color: #374151; /* slightly lighter gray */
+  padding-left: 10px;
+}
+
+.sidebar-footer button {
+  width: 100%;
+  padding: 10px;
+  background-color: #ef4444; /* red */
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.sidebar-footer button:hover {
+  background-color: #dc2626; /* darker red */
+}
