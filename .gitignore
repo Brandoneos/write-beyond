@@ -112,3 +112,5 @@ backend/write-beyond/target/surefire-reports/TEST-com.example.write_beyond.Write
 backend/write-beyond/target/classes/application.properties
 backend/write-beyond/target/maven-archiver/pom.properties
 frontend/note.txt
+frontend/file.txt
+frontend/chat.txt
