@@ -23,6 +23,7 @@ const HomePage = () => {
       <button onClick={fetchGoodbye}>Goodbye from Home Page API</button>
       <button onClick={() => navigate("/goodbye")}>Go to Goodbye Page</button>
       <button onClick={() => navigate("/login")}>Logout</button>
+      <button onClick={() => navigate("/new-file")}>Make New File</button>
       <p>{message}</p>
     </div>
   );

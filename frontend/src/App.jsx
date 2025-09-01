@@ -5,6 +5,7 @@ import HomePage from "./Pages/home.jsx";
 import Layout from "./Components/Layout.jsx";
 import "./App.css";
 import "./index.css";
+import NewFilePage from "./Pages/NewFilePage.jsx";
 
 const App = () => {
   return (
@@ -14,6 +15,7 @@ const App = () => {
         <Route element={<Layout />}>
           <Route path="/goodbye" element={<GoodbyePage />} />
           <Route path="/" element={<HomePage />} />
+          <Route path="/new-file" element={<NewFilePage />} />
         </Route>
 
       </Routes>
