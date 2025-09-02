@@ -1,31 +1,33 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
-const NewFilePage = () => {
-    
-    const [content, setContent] = useState("");
+const EditFilePage = () => {
+
+    const location = useLocation();
+    const file = location.state?.file;
+    const [content, setContent] = useState(file?.content);
     const navigate = useNavigate();
-    const [title, setTitle] = useState("New File");
+    const [title, setTitle] = useState(file?.name);
+
+
 
     const handleBack = async () => {
-        if (content.trim() !== "" || title !== "New File") {
-            console.log("File is not empty");
-            try {
-                await fetch("http://localhost:8080/api/files", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({
-                        name: title,
-                        content,
-                        createdAt: new Date().toISOString(),
-                    }),
-                });
-            } catch (err) {
-                console.error("Failed to save file:", err);
-            }
-        } else {
-            console.log("File is empty");
+
+        // console.log("File is not empty"); Editing File
+        try {
+            await fetch(`http://localhost:8080/api/files/${file.id}`, {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    name: title,
+                    content,
+                    updatedAt: new Date().toISOString(),
+                }),
+            });
+        } catch (err) {
+            console.error("Failed to save file:", err);
         }
+
 
         navigate(-1); // go back
     };
@@ -85,5 +87,5 @@ const NewFilePage = () => {
     );
 };
 
-export default NewFilePage;
+export default EditFilePage;
 

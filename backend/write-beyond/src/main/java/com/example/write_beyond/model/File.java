@@ -1,9 +1,7 @@
 package com.example.write_beyond.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 public class File {
@@ -13,15 +11,16 @@ public class File {
     private Long id;
 
     private String name;
+
+    @Column(columnDefinition = "TEXT")
     private String content;
+
+    private LocalDateTime dateCreated;
+
+    private LocalDateTime dateModified;
 
     // Constructors
     public File() {}
-
-    public File(String name, String content) {
-        this.name = name;
-        this.content = content;
-    }
 
     // Getters and Setters
     public Long getId() { return id; }
@@ -32,4 +31,10 @@ public class File {
 
     public String getContent() { return content; }
     public void setContent(String content) { this.content = content; }
+
+    public LocalDateTime getDateCreated() { return dateCreated; }
+    public void setDateCreated(LocalDateTime dateCreated) { this.dateCreated = dateCreated; }
+
+    public LocalDateTime getDateModified() { return dateModified; }
+    public void setDateModified(LocalDateTime dateModified) { this.dateModified = dateModified; }
 }
