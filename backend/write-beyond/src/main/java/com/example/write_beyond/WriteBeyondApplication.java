@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class WriteBeyondApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(WriteBeyondApplication.class, args);
+        SpringApplication.run(WriteBeyondApplication.class, args);
 	}
 
 }

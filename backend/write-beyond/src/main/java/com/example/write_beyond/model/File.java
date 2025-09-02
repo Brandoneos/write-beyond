@@ -1,25 +1,29 @@
 package com.example.write_beyond.model;
 
-import java.time.LocalDateTime;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
+@Entity
 public class File {
-    private Long id;          // unique identifier
-    private String name;      // file name
-    private String content;   // file content
-    private LocalDateTime createdAt; // optional timestamp
 
-    // ✅ Default constructor is required for JSON deserialization
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String name;
+    private String content;
+
+    // Constructors
     public File() {}
 
-    // ✅ Full constructor
-    public File(Long id, String name, String content, LocalDateTime createdAt) {
-        this.id = id;
+    public File(String name, String content) {
         this.name = name;
         this.content = content;
-        this.createdAt = createdAt;
     }
 
-    // ✅ Getters and Setters
+    // Getters and Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
@@ -28,7 +32,4 @@ public class File {
 
     public String getContent() { return content; }
     public void setContent(String content) { this.content = content; }
-
-    public LocalDateTime getCreatedAt() { return createdAt; }
-    public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
 }
