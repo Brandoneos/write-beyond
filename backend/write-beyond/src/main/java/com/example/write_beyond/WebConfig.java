@@ -14,10 +14,22 @@ public class WebConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 // allow React dev server to access Spring Boot APIs
-                registry.addMapping("/")          // root endpoint
-                        .allowedOrigins("http://localhost:3000");
-                registry.addMapping("/goodbye")   // /goodbye endpoint
-                        .allowedOrigins("http://localhost:3000");
+                registry.addMapping("/**")
+                        .allowedOrigins("*")  // allow any origin
+                        .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS");
+
+//                registry.addMapping("/")          // root endpoint
+//                        .allowedOrigins("http://localhost:3000");
+//                registry.addMapping("/goodbye")   // /goodbye endpoint
+//                        .allowedOrigins("http://localhost:3000");
+//                registry.addMapping("/api")   // /goodbye endpoint
+//                        .allowedOrigins("http://localhost:3000");
+//                registry.addMapping("/api/files")   // /goodbye endpoint
+//                        .allowedOrigins("http://localhost:3000");
+//                registry.addMapping("/api/files/{id}")   // /goodbye endpoint
+//                        .allowedOrigins("http://localhost:3000");
+
+
             }
         };
     }

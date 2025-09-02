@@ -11,7 +11,7 @@ const NewFilePage = () => {
         if (content.trim() !== "" || title !== "New File") {
             console.log("File is not empty");
             try {
-                await fetch("http://localhost:8080/api/files", {
+                await fetch(`http://localhost:8080/api/files`, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({
@@ -24,6 +24,7 @@ const NewFilePage = () => {
                 console.error("Failed to save file:", err);
             }
         } else {
+            
             console.log("File is empty");
         }
 

@@ -8,7 +8,8 @@ const FilesPage = () => {
   useEffect(() => {
     const loadFiles = async () => {
       try {
-        const res = await fetch("http://localhost:8080/api/files");
+        // console.log("env:",process.env.REACT_APP_API_URL);
+        const res = await fetch(`http://localhost:8080/api/files`);
         if (!res.ok) throw new Error("Failed to fetch files");
         const data = await res.json();
         setFiles(data);
