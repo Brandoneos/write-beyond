@@ -16,7 +16,7 @@ const GoodbyePage = () => {
   };
 
   return (
-    <div style={{ padding: "400px" }}>
+    <div style={{ paddingTop: "20px", paddingLeft: "320px" }}>
       <h1>Goodbye Page</h1>
       <button onClick={fetchGoodbye}>Goodbye API</button>
       <button onClick={() => navigate("/")}>Go to Home Page</button>

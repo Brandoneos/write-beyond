@@ -6,6 +6,7 @@ import Layout from "./Components/Layout.jsx";
 import "./App.css";
 import "./index.css";
 import NewFilePage from "./Pages/NewFilePage.jsx";
+import FilesPage from "./Pages/FilesPage.jsx";
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
           <Route path="/goodbye" element={<GoodbyePage />} />
           <Route path="/" element={<HomePage />} />
           <Route path="/new-file" element={<NewFilePage />} />
+          <Route path="/files" element={<FilesPage />} />
         </Route>
 
       </Routes>

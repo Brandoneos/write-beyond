@@ -24,6 +24,7 @@ const HomePage = () => {
       <button onClick={() => navigate("/goodbye")}>Go to Goodbye Page</button>
       <button onClick={() => navigate("/login")}>Logout</button>
       <button onClick={() => navigate("/new-file")}>Make New File</button>
+      <button onClick={() => navigate("/files")}>Files</button>
       <p>{message}</p>
     </div>
   );
