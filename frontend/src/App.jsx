@@ -8,19 +8,24 @@ import "./index.css";
 import NewFilePage from "./Pages/NewFilePage.jsx";
 import FilesPage from "./Pages/FilesPage.jsx";
 import EditFilePage from "./Pages/EditFilePage.jsx";
+import RequireAuth from "./Components/RequireAuth";
+
 
 const App = () => {
   return (
     <Router>
       <Routes>
         <Route path="/login" element={<LoginPage />} />
-        <Route element={<Layout />}>
-          <Route path="/goodbye" element={<GoodbyePage />} />
-          <Route path="/" element={<HomePage />} />
-          <Route path="/new-file" element={<NewFilePage />} />
-          <Route path="/edit-file" element={<EditFilePage />} />
-          <Route path="/files" element={<FilesPage />} />
+        <Route element={<RequireAuth />}>
+          <Route element={<Layout />}>
+            <Route path="/goodbye" element={<GoodbyePage />} />
+            <Route path="/" element={<HomePage />} />
+            <Route path="/new-file" element={<NewFilePage />} />
+            <Route path="/edit-file" element={<EditFilePage />} />
+            <Route path="/files" element={<FilesPage />} />
+          </Route>
         </Route>
+
 
       </Routes>
     </Router>

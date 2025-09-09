@@ -17,12 +17,18 @@ const HomePage = () => {
     }
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem("jwt"); // clear token
+    navigate("/login"); // redirect to login
+  };
+
   return (
     <div style={{ paddingTop: "20px", paddingLeft: "320px" }}>
       <h1>Home Page</h1>
       <button onClick={fetchGoodbye}>Goodbye from Home Page API</button>
       <button onClick={() => navigate("/goodbye")}>Go to Goodbye Page</button>
-      <button onClick={() => navigate("/login")}>Logout</button>
+      {/* <button onClick={() => navigate("/login")}>Logout</button> */}
+      <button onClick={ handleLogout}>Logout</button>
       <button onClick={() => navigate("/new-file")}>Make New File</button>
       <button onClick={() => navigate("/files")}>Files</button>
       <p>{message}</p>
