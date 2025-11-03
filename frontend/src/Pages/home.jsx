@@ -3,10 +3,11 @@ import { useNavigate } from "react-router-dom";
 import "../index.css";
 // import App from "../App";
 
+import { useAuth } from "../context/AuthContext";
 const HomePage = () => {
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
-
+  const { logout } = useAuth();
   const fetchGoodbye = async () => {
     try {
       const res = await fetch("http://localhost:8080/goodbye");
@@ -18,8 +19,8 @@ const HomePage = () => {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem("jwt"); // clear token
-    navigate("/login"); // redirect to login
+    logout();                    // ← CLEARS user + localStorage
+    navigate("/login");          // ← THEN go to login
   };
 
   return (
@@ -27,8 +28,7 @@ const HomePage = () => {
       <h1>Home Page</h1>
       <button onClick={fetchGoodbye}>Goodbye from Home Page API</button>
       <button onClick={() => navigate("/goodbye")}>Go to Goodbye Page</button>
-      {/* <button onClick={() => navigate("/login")}>Logout</button> */}
-      <button onClick={ handleLogout}>Logout</button>
+      <button onClick={handleLogout}>Logout</button>
       <button onClick={() => navigate("/new-file")}>Make New File</button>
       <button onClick={() => navigate("/files")}>Files</button>
       <p>{message}</p>

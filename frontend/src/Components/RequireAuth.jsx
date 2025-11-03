@@ -1,10 +1,18 @@
-import { Navigate, Outlet } from "react-router-dom";
+// src/components/RequireAuth.jsx
+import { Navigate, Outlet, useLocation } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
-const RequireAuth = () => {
-  const token = localStorage.getItem("jwt");
+function RequireAuth() {
+  const { user } = useAuth();
+  const location = useLocation(); // ← ADD THIS
+  console.log("RequireAuth: user =", user); // ← ADD THIS
 
-  // later: add check for token validity/expiration
-  return token ? <Outlet /> : <Navigate to="/login" replace />;
-};
+  if (!user) {
+    console.log("No user → redirect to /login");
+    return <Navigate to="/login" replace />;
+  }
+  return <Outlet />;
+}
 
+// Must export!
 export default RequireAuth;

@@ -10,10 +10,9 @@ import FilesPage from "./Pages/FilesPage.jsx";
 import EditFilePage from "./Pages/EditFilePage.jsx";
 import RequireAuth from "./Components/RequireAuth";
 
-
 const App = () => {
   return (
-    <Router>
+    
       <Routes>
         <Route path="/login" element={<LoginPage />} />
         <Route element={<RequireAuth />}>
@@ -28,7 +27,7 @@ const App = () => {
 
 
       </Routes>
-    </Router>
+    
   );
 };
 
