@@ -21,8 +21,8 @@ public class FileController {
     }
 
     @GetMapping("/files")
-    public List<File> getAllFiles() {
-        return fileRepository.findAll();
+    public List<File> getFiles(@RequestHeader("User-Id") Long userId) {
+        return fileRepository.findByUserId(userId);
     }
 
     @PostMapping("/files")

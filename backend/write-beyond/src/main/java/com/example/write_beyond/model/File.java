@@ -15,6 +15,9 @@ public class File {
     @Column(columnDefinition = "TEXT")
     private String content;
 
+    @Column(name = "user_id")
+    private Long userId;
+
     private LocalDateTime dateCreated;
 
     private LocalDateTime dateModified;
@@ -37,4 +40,12 @@ public class File {
 
     public LocalDateTime getDateModified() { return dateModified; }
     public void setDateModified(LocalDateTime dateModified) { this.dateModified = dateModified; }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
 }

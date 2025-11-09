@@ -1,26 +1,43 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 const FilesPage = () => {
   const [files, setFiles] = useState([]);
   const navigate = useNavigate();
+  const { user } = useAuth();
 
   useEffect(() => {
+    if (!user?.id) {
+      setFiles([]);
+      return;
+    }
+  
     const loadFiles = async () => {
       try {
-        // console.log("env:",process.env.REACT_APP_API_URL);
-        const res = await fetch(`http://localhost:8080/api/files`);
-        if (!res.ok) throw new Error("Failed to fetch files");
+        const res = await fetch("http://localhost:8080/api/files", {
+          method: "GET",
+          headers: {
+            "User-Id": user.id.toString(),   // ← This sends the ID
+            "Content-Type": "application/json"
+          }
+        });
+  
+        if (!res.ok) {
+          throw new Error(`HTTP ${res.status}`);
+        }
+  
         const data = await res.json();
         setFiles(data);
       } catch (err) {
-        console.error("Error fetching files:", err);
-        setFiles([]); // fallback to empty
+        console.error("Failed to load files:", err);
+        setFiles([]);
       }
     };
-
+  
     loadFiles();
-  }, []);
+  }, [user?.id]);
+
 
   const handleDelete = async (fileId) => {
     if (!window.confirm("Are you sure you want to delete this file?")) return;

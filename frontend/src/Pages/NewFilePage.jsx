@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 const NewFilePage = () => {
-    
+    //const userData = { id: data.id, username: data.username };
     const [content, setContent] = useState("");
     const navigate = useNavigate();
     const [title, setTitle] = useState("New File");
-
+    const { user } = useAuth();
     const handleBack = async () => {
         if (content.trim() !== "" || title !== "New File") {
             console.log("File is not empty");
@@ -17,7 +18,7 @@ const NewFilePage = () => {
                     body: JSON.stringify({
                         name: title,
                         content,
-                        createdAt: new Date().toISOString(),
+                        userId: user.id,
                     }),
                 });
             } catch (err) {

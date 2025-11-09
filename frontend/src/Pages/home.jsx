@@ -1,10 +1,14 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+
 import "../index.css";
 // import App from "../App";
 
 import { useAuth } from "../context/AuthContext";
+
+
 const HomePage = () => {
+  const { user } = useAuth();
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
   const { logout } = useAuth();
@@ -25,7 +29,7 @@ const HomePage = () => {
 
   return (
     <div style={{ paddingTop: "20px", paddingLeft: "320px" }}>
-      <h1>Home Page</h1>
+      <h1>Home Page (User: {user.username})</h1>
       <button onClick={fetchGoodbye}>Goodbye from Home Page API</button>
       <button onClick={() => navigate("/goodbye")}>Go to Goodbye Page</button>
       <button onClick={handleLogout}>Logout</button>

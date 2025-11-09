@@ -5,10 +5,10 @@ import { useAuth } from "../context/AuthContext";
 function RequireAuth() {
   const { user } = useAuth();
   const location = useLocation(); // ← ADD THIS
-  console.log("RequireAuth: user =", user); // ← ADD THIS
+  // console.log("RequireAuth: user =", user); // ← ADD THIS
 
   if (!user) {
-    console.log("No user → redirect to /login");
+    // console.log("No user → redirect to /login");
     return <Navigate to="/login" replace />;
   }
   return <Outlet />;
