@@ -20,6 +20,11 @@ public class User {
     private String password;
 
     private LocalDateTime registeredAt;
+
+    @Column(nullable=false, columnDefinition = "integer default 0")
+    private Integer role;
+
+
     public User() {}
 
     public Long getId() {
@@ -49,5 +54,11 @@ public class User {
     }
 
 
+    public Integer getRole() {
+        return role;
+    }
 
+    public void setRole(Integer role) {
+        this.role = role;
+    }
 }

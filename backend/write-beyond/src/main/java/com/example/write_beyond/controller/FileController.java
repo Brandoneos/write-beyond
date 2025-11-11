@@ -2,6 +2,7 @@ package com.example.write_beyond.controller;
 
 import com.example.write_beyond.model.File;
 import com.example.write_beyond.repository.FileRepository;
+import com.example.write_beyond.repository.UserRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,14 +16,21 @@ import java.util.Optional;
 public class FileController {
 
     private final FileRepository fileRepository;
-
-    public FileController(FileRepository fileRepository) {
+    private final UserRepository userRepository;
+    public FileController(FileRepository fileRepository, UserRepository userRepository) {
         this.fileRepository = fileRepository;
+        this.userRepository = userRepository;
     }
 
     @GetMapping("/files")
     public List<File> getFiles(@RequestHeader("User-Id") Long userId) {
-        return fileRepository.findByUserId(userId);
+        boolean isAdmin = userRepository.isAdmin(userId); // You need to implement this
+//        boolean isAdmin = false;
+        if (isAdmin) {
+            return fileRepository.findAll();
+        } else {
+            return fileRepository.findByUserId(userId);
+        }
     }
 
     @PostMapping("/files")

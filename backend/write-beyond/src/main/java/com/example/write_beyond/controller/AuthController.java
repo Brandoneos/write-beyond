@@ -40,6 +40,7 @@ public class AuthController {
         user.setUsername(request.username());
         user.setPassword(encoder.encode(request.password()));
         user.setRegisteredAt(LocalDateTime.now());
+        user.setRole(0);
         userRepo.save(user);
         return ResponseEntity.status(201)
                 .body(Map.of("message", "Registered successfully"));
