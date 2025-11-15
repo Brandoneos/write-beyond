@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef, useCallback } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
@@ -7,7 +7,7 @@ const FilesPage = () => {
   const [page, setPage] = useState(0);
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
-  const hasLoadedRef = useRef(false);
+
   const navigate = useNavigate();
   const { user } = useAuth();
 
@@ -16,22 +16,26 @@ const FilesPage = () => {
   // -----------------------------------------------------------------
   // Load a single page (replaces old loadFiles)
   // -----------------------------------------------------------------
-  const loadPage = useCallback(async (pageNum) => {
+  const loadPage = async (pageNum) => {
     if (!user?.id || loading) return;
 
     setLoading(true);
-    console.log("loadPage called:", pageNum);
     try {
       const res = await fetch(
         `http://localhost:8080/api/files?page=${pageNum}&size=${PAGE_SIZE}`,
         {
-          headers: { "User-Id": user.id.toString() },
+          method: "GET",
+          headers: {
+            "User-Id": user.id.toString(),
+            // "Content-Type" not needed for GET
+          },
         }
       );
 
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      const data = await res.json();
-      console.log(data.content);
+
+      const data = await res.json(); // Spring Page response
+
       setFiles((prev) => [...prev, ...data.content]);
       setHasMore(!data.last);
       setPage(pageNum + 1);
@@ -40,7 +44,7 @@ const FilesPage = () => {
     } finally {
       setLoading(false);
     }
-  }, [user?.id, loading, PAGE_SIZE]); // ← Only recreate if these change
+  };
 
   // -----------------------------------------------------------------
   // Initial load + dependency on user.id
@@ -50,25 +54,21 @@ const FilesPage = () => {
       setFiles([]);
       setPage(0);
       setHasMore(true);
-      hasLoadedRef.current = false;
       return;
     }
 
-    if (hasLoadedRef.current) return;
-
-    hasLoadedRef.current = true;
+    // Reset and load first page
     setFiles([]);
     setPage(0);
     setHasMore(true);
     loadPage(0);
-  }, [user?.id, loadPage]); // ← Now safe!
+  }, [user?.id]);
 
   // -----------------------------------------------------------------
   // Load More handler
   // -----------------------------------------------------------------
   const handleLoadMore = () => {
     if (!loading && hasMore) {
-      // console.log("Handle load more called");//not called
       loadPage(page);
     }
   };
@@ -107,15 +107,12 @@ const FilesPage = () => {
           border: "2px solid #030000ff",
         }}
       />
-  
-      {/* Show loading or empty state */}
-      {loading && files.length === 0 ? (
-        <p>Loading files...</p>
-      ) : files.length === 0 ? (
+
+      {files.length === 0 && !loading ? (
         <p>No files yet. Create one!</p>
       ) : (
         <>
-          {/* Sorted file list */}
+          {/* Sorted list */}
           {[...files]
             .sort((a, b) => new Date(b.dateModified) - new Date(a.dateModified))
             .map((file) => (
@@ -132,7 +129,7 @@ const FilesPage = () => {
                   onClick={() => navigate("/edit-file", { state: { file } })}
                   style={{ cursor: "pointer" }}
                 >
-                  {file.title}
+                  {file.name}
                 </button>
                 <button
                   onClick={() => handleDelete(file.id)}
@@ -143,11 +140,11 @@ const FilesPage = () => {
                   }}
                   title="Delete file"
                 >
-                  🗑️
+                  Trash
                 </button>
               </div>
             ))}
-  
+
           {/* Load More Button */}
           {hasMore && (
             <div style={{ marginTop: "20px", textAlign: "center" }}>

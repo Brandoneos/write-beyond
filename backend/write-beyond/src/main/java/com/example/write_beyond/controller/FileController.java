@@ -1,10 +1,17 @@
 package com.example.write_beyond.controller;
 
+import com.example.write_beyond.dto.FileDto;
 import com.example.write_beyond.model.File;
 import com.example.write_beyond.repository.FileRepository;
 import com.example.write_beyond.repository.UserRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -23,14 +30,22 @@ public class FileController {
     }
 
     @GetMapping("/files")
-    public List<File> getFiles(@RequestHeader("User-Id") Long userId) {
-        boolean isAdmin = userRepository.isAdmin(userId); // You need to implement this
-//        boolean isAdmin = false;
-        if (isAdmin) {
-            return fileRepository.findAll();
-        } else {
-            return fileRepository.findByUserId(userId);
-        }
+    public Page<FileDto> getFiles(
+            @RequestHeader("User-Id") Long userId,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "25") int size) {
+
+        Sort sort = Sort.by(Sort.Direction.DESC, "dateCreated");
+
+        Pageable pageable = PageRequest.of(page, size, sort);
+
+        boolean isAdmin = userRepository.isAdmin(userId); // your existing method
+
+        Page<File> pageResult = isAdmin
+                ? fileRepository.findAll(pageable)
+                : fileRepository.findByUserId(userId, pageable);
+
+        return pageResult.map(FileDto::from);
     }
 
     @PostMapping("/files")
@@ -39,6 +54,12 @@ public class FileController {
         file.setDateCreated(LocalDateTime.now());
         file.setDateModified(LocalDateTime.now());
         return fileRepository.save(file);
+    }
+    @GetMapping("/files/{id}/content")
+    public ResponseEntity<String> getFileContent(@PathVariable Long id) {
+        File file = (File) fileRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        return ResponseEntity.ok(file.getContent());
     }
     @PutMapping("/files/{id}")
     public ResponseEntity<File> updateFile(@PathVariable Long id, @RequestBody File updatedFile) {
@@ -52,6 +73,16 @@ public class FileController {
                 })
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
+//    @PutMapping("/{id}")
+//    public ResponseEntity<Void> updateFile(@PathVariable Long id,
+//                                       @RequestBody UpdateFileRequest req,
+//                                       @RequestHeader("User-Id") Long userId) {
+////        fileService.update(id, userId, req.title(), req.content());
+//        File file = (File) fileRepository.findByIdAndUserId(id, userId)
+//                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+//        file.setContent(req);
+//        return ResponseEntity.ok().build();
+//    }
 
 
     @DeleteMapping("/files/{id}")
