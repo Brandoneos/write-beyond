@@ -1,0 +1,5 @@
+Add
+
+CREATE INDEX idx_file_user_created ON file (user_id, date_created DESC);
+
+to the postgresql database in order to add indexing for the files.
